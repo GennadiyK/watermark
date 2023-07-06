@@ -7,11 +7,11 @@ export const useImgToURIWithWatermark = ({
   src: string;
 }) => {
   const [uri, setUri] = useState("");
-  const canvas = document.createElement("canvas");
-  const context = canvas.getContext("2d");
   const imageObj = useMemo(() => new Image(), []);
 
   useEffect(() => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
     imageObj.onload = function () {
       const imgHeight = imageObj.naturalHeight;
       const imgWidth = imageObj.naturalWidth;
@@ -37,7 +37,7 @@ export const useImgToURIWithWatermark = ({
       const imgUrl = canvas.toDataURL();
       setUri(imgUrl);
     };
-  }, [imageObj, canvas, context, fillText]);
+  }, [imageObj, fillText]);
 
   useEffect(() => {
     imageObj.crossOrigin = "anonymous"; //not necessary, if image hosted on same server
