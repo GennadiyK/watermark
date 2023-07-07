@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 export const useImgToURIWithWatermark = ({
   fillText,
+  textColor,
   src,
 }: {
   fillText: string;
+  textColor: string;
   src: string;
 }) => {
   const [uri, setUri] = useState("");
@@ -29,7 +31,7 @@ export const useImgToURIWithWatermark = ({
           imgWidth,
           imgHeight
         );
-        context.fillStyle = "white";
+        context.fillStyle = textColor;
         context.textBaseline = "middle";
         context.font = "50px 'Montserrat'";
         context.fillText(fillText, 10, 20);
@@ -37,7 +39,7 @@ export const useImgToURIWithWatermark = ({
       const imgUrl = canvas.toDataURL();
       setUri(imgUrl);
     };
-  }, [imageObj, fillText]);
+  }, [imageObj, fillText, textColor]);
 
   useEffect(() => {
     imageObj.crossOrigin = "anonymous"; //not necessary, if image hosted on same server
