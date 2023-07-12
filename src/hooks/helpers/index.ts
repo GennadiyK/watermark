@@ -1,12 +1,41 @@
-import {WatermarkPositionType} from '../types'
+import { WatermarkPositionType } from "../types";
 
+export const getPosition = (
+  position: WatermarkPositionType,
+  indent: number,
+  img: HTMLImageElement
+) => {
+  const imgHeight = img.naturalHeight;
+  const imgWidth = img.naturalWidth;
+  const rightPosition = imgWidth - indent;
+  const centerHPosition = imgHeight / 2;
+  const centerWPosition = imgWidth / 2 - indent;
+  const bottomPosition = imgHeight - indent;
+  let textAlign: CanvasTextAlign = "left";
 
-export const getPosition = (position: WatermarkPositionType) => {
-    const positions:{ [key: string]: number[] } = {
-        leftTop: [50, 50],
-        leftCenter: [50, 100], // need to define center form img size
-        leftBottom: [50, 200] // need to define bottom form img size
-    }
+  if (position.includes("right")) {
+    textAlign = "right";
+  }
 
-    return positions[position]
-}
+  if (
+    position === "center" ||
+    position === "bottomCenter" ||
+    position === "topCenter"
+  ) {
+    textAlign = "center";
+  }
+
+  const positions: Record<WatermarkPositionType, number[]> = {
+    leftTop: [indent, indent],
+    leftCenter: [indent, centerHPosition],
+    leftBottom: [indent, bottomPosition],
+    rightTop: [rightPosition, indent],
+    rightCenter: [rightPosition, centerHPosition],
+    rightBottom: [rightPosition, bottomPosition],
+    center: [centerWPosition, centerHPosition],
+    bottomCenter: [centerWPosition, bottomPosition],
+    topCenter: [centerWPosition, indent],
+  };
+
+  return { position: positions[position], textAlign };
+};

@@ -1,18 +1,21 @@
 import React from "react";
 import { FormField } from "../FormField/FormField";
 import { FormItem } from "../FormItem/FormItem";
-import { DEFAULT_TEXT_SIZE } from '../../constants'
+import { selectOptions } from "../../data";
+import { DEFAULT_TEXT_SIZE, DEFAULT_TEXT_INDENT } from "../../constants";
 
 type WatermarkTextSettingsType = {
   onChangeColorHandler: React.ChangeEventHandler<HTMLInputElement>;
-  onChangeSizeHandler: React.ChangeEventHandler<HTMLInputElement>
-  onChangePositionHandler: React.ChangeEventHandler<HTMLSelectElement>
+  onChangeSizeHandler: React.ChangeEventHandler<HTMLInputElement>;
+  onChangePositionHandler: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeIndentHandler: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
   onChangeColorHandler,
   onChangeSizeHandler,
-  onChangePositionHandler
+  onChangePositionHandler,
+  onChangeIndentHandler,
 }) => {
   return (
     <>
@@ -23,6 +26,8 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
           labelText="Choose color:"
           onChangeHandler={onChangeColorHandler}
         />
+      </FormItem>
+      <FormItem>
         <FormField
           fieldType="number"
           fieldId="textSize"
@@ -30,11 +35,26 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
           placeholder={DEFAULT_TEXT_SIZE}
           onChangeHandler={onChangeSizeHandler}
         />
-        <select onChange={onChangePositionHandler}>
-          <option value="leftTop">left top</option>
-          <option value="leftCenter">left center</option>
-          <option value="leftBottom">left bottom</option>
-        </select>
+      </FormItem>
+      <FormItem>
+        <FormField
+          fieldType="select"
+          fieldId="position"
+          labelText="Choose position:"
+          selectProps={{
+            options: selectOptions,
+            onChange: onChangePositionHandler,
+          }}
+        />
+      </FormItem>
+      <FormItem>
+        <FormField
+          fieldType="number"
+          fieldId="textIndent"
+          labelText="Choose text indent:"
+          placeholder={`${DEFAULT_TEXT_INDENT}`}
+          onChangeHandler={onChangeIndentHandler}
+        />
       </FormItem>
     </>
   );

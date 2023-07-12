@@ -4,5 +4,7 @@ export type WatermarkPositionType =
   | "leftCenter"
   | "rightTop"
   | "rightCenter"
-  | "rightBotom"
-  | "center";
+  | "rightBottom"
+  | "center"
+  | "topCenter"
+  | "bottomCenter";

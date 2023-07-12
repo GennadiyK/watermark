@@ -1,20 +1,29 @@
 import React from "react";
-import './formField.css'
+import { Select, SelectProps } from "../Select/Select";
+import "./formField.css";
 
-export type FormFieldType = {
+type FieldType = "text" | "color" | "file" | "number" | "select";
+
+export type FormFieldProps = {
   labelText?: string;
-  fieldType?: "text" | "color" | "file" | "number" | "select";
+  fieldType?: FieldType;
   fieldId: string;
   onChangeHandler?: React.ChangeEventHandler<HTMLInputElement> | undefined;
-  placeholder?: string
+  placeholder?: string;
+  selectProps?: SelectProps;
 };
 
-export const FormField: React.FC<FormFieldType> = ({
+const renderSelectField = (props: SelectProps) => {
+  return <Select {...props} />;
+};
+
+export const FormField: React.FC<FormFieldProps> = ({
   labelText,
   fieldId,
   fieldType = "text",
   onChangeHandler,
-  placeholder
+  placeholder,
+  selectProps,
 }) => {
   return (
     <>
@@ -23,13 +32,18 @@ export const FormField: React.FC<FormFieldType> = ({
           {labelText}
         </label>
       ) : null}
-      <input
-        className="form-field-text"
-        id={fieldId}
-        type={fieldType}
-        onChange={onChangeHandler}
-        placeholder={placeholder}
-      />
+
+      {fieldType === "select" && selectProps ? (
+        renderSelectField(selectProps)
+      ) : (
+        <input
+          className="form-field-text"
+          id={fieldId}
+          type={fieldType}
+          onChange={onChangeHandler}
+          placeholder={placeholder}
+        />
+      )}
     </>
   );
 };
