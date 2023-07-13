@@ -8,3 +8,9 @@ export type WatermarkPositionType =
   | "center"
   | "topCenter"
   | "bottomCenter";
+
+
+  export type WatermarkTextFont =
+  | "Times New Roman"
+  | "Courier"
+  | "Arial";

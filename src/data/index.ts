@@ -1,6 +1,6 @@
 import {SelectOption} from '../components/Select/Select'
 
-export const selectOptions:SelectOption[] = [
+export const selectPositionOptions:SelectOption[] = [
     {
       label: 'left top',
       value: 'leftTop'
@@ -36,5 +36,20 @@ export const selectOptions:SelectOption[] = [
     {
       label: 'bottom center',
       value: 'bottomCenter'
+    }
+  ]
+
+  export const selectFontOptions:SelectOption[] = [
+    {
+      label: 'Arial',
+      value: 'Arial'
+    },
+    {
+      label: 'Courier',
+      value: 'Courier'
+    },
+    {
+      label: 'Times New Roman',
+      value: 'Times New Roman'
     }
   ]

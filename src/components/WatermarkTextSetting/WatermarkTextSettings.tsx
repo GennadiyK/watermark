@@ -1,13 +1,14 @@
 import React from "react";
 import { FormField } from "../FormField/FormField";
 import { FormItem } from "../FormItem/FormItem";
-import { selectOptions } from "../../data";
+import { selectPositionOptions, selectFontOptions } from "../../data";
 import { DEFAULT_TEXT_SIZE, DEFAULT_TEXT_INDENT } from "../../constants";
 
 type WatermarkTextSettingsType = {
   onChangeColorHandler: React.ChangeEventHandler<HTMLInputElement>;
   onChangeSizeHandler: React.ChangeEventHandler<HTMLInputElement>;
   onChangePositionHandler: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeFontHandler: React.ChangeEventHandler<HTMLSelectElement>;
   onChangeIndentHandler: React.ChangeEventHandler<HTMLInputElement>;
 };
 
@@ -15,6 +16,7 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
   onChangeColorHandler,
   onChangeSizeHandler,
   onChangePositionHandler,
+  onChangeFontHandler,
   onChangeIndentHandler,
 }) => {
   return (
@@ -39,10 +41,21 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
       <FormItem>
         <FormField
           fieldType="select"
+          fieldId="font"
+          labelText="Choose font:"
+          selectProps={{
+            options: selectFontOptions,
+            onChange: onChangeFontHandler,
+          }}
+        />
+      </FormItem>
+      <FormItem>
+        <FormField
+          fieldType="select"
           fieldId="position"
           labelText="Choose position:"
           selectProps={{
-            options: selectOptions,
+            options: selectPositionOptions,
             onChange: onChangePositionHandler,
           }}
         />

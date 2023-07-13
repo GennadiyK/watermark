@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {getPosition} from './helpers'
-import {WatermarkPositionType} from './types'
+import {WatermarkPositionType, WatermarkTextFont} from './types'
 
 
 export type UseImgToURIWithWatermarkType = {
@@ -8,6 +8,7 @@ export type UseImgToURIWithWatermarkType = {
   textColor: string;
   textSize: string;
   textPosition: WatermarkPositionType
+  textFont: WatermarkTextFont
   textIndent: number
   src: string;
 };
@@ -18,6 +19,7 @@ export const useImgToURIWithWatermark = ({
   textSize,
   src,
   textPosition,
+  textFont,
   textIndent,
 }: UseImgToURIWithWatermarkType) => {
   const [uri, setUri] = useState("");
@@ -48,18 +50,18 @@ export const useImgToURIWithWatermark = ({
         context.textAlign = textAlign;
         context.textBaseline = "middle"
         context.fillStyle = textColor;
-        context.font = `${textSize}px 'Montserrat'`;
+        context.font = `${textSize}px '${textFont}'`;
         context.fillText(fillText, posX, posY);
       }
       const imgUrl = canvas.toDataURL();
       setUri(imgUrl);
     };
-  }, [imageObj, fillText, textColor, textSize, textPosition, textIndent]);
+  }, [imageObj, fillText, textColor, textSize, textPosition, textIndent, textFont]);
 
   useEffect(() => {
     imageObj.crossOrigin = "anonymous"; //not necessary, if image hosted on same server
     imageObj.src = src;
-  }, [imageObj, src, fillText, textColor, textSize, textPosition, textIndent]);
+  }, [imageObj, src, fillText, textColor, textSize, textPosition, textIndent, textFont]);
 
   return uri;
 };

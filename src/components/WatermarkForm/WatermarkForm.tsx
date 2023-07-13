@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { WatermarkTextSettings } from "../WatermarkTextSetting/WatermarkTextSettings";
 import { FormItem } from "../FormItem/FormItem";
 import { FormField } from "../FormField/FormField";
-import { WatermarkPositionType } from "../../hooks/types";
+import { WatermarkPositionType, WatermarkTextFont } from "../../hooks/types";
 import "./watermarkForm.css";
 
 type WatermarkFormProps = {
@@ -13,6 +13,7 @@ type WatermarkFormProps = {
   setTextColor: React.Dispatch<React.SetStateAction<string>>;
   setTextSize: React.Dispatch<React.SetStateAction<string>>;
   setTextPosition: React.Dispatch<React.SetStateAction<WatermarkPositionType>>;
+  setTextFont: React.Dispatch<React.SetStateAction<WatermarkTextFont>>;
   setTextIndent: React.Dispatch<React.SetStateAction<number>>;
 };
 
@@ -22,6 +23,7 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
   setTextColor,
   setTextSize,
   setTextPosition,
+  setTextFont,
   setTextIndent,
 }) => {
   const [text, setText] = useState("");
@@ -64,9 +66,14 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
   const onTextPositionChangeHandler: React.ChangeEventHandler<
     HTMLSelectElement
   > = (e) => {
-    console.log("e.target.value", e.target.value);
     setTextPosition(e.target.value as any); // ToDo: fix any
   };
+
+  const onTextFontChangeHandler: React.ChangeEventHandler<
+  HTMLSelectElement
+> = (e) => {
+  setTextFont(e.target.value as any); // ToDo: fix any
+};
 
   const onIndentChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
     e
@@ -99,6 +106,7 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
           onChangeColorHandler={onTextColoreChangeHandler}
           onChangeSizeHandler={onTextSizeChangeHandler}
           onChangePositionHandler={onTextPositionChangeHandler}
+          onChangeFontHandler={onTextFontChangeHandler}
           onChangeIndentHandler={onIndentChangeHandler}
         />
       )}
