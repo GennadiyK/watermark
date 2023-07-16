@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { WatermarkContext } from "./context";
 import SofiaFont from "./assets/fonts/Sofia-Regular.ttf";
 import { useImgToURIWithWatermark } from "./hooks";
-import { WatermarkForm, WatermarkView } from "./components";
+import { WatermarkForm, WatermarkView, Header } from "./components";
 import { DEFAULT_TEXT_SIZE, DEFAULT_TEXT_INDENT } from "./constants";
 import { WatermarkPositionType, WatermarkTextFont } from "./types";
-import {FONTS} from './data'
+import { FONTS } from "./data";
 
 import "./App.css";
 
@@ -29,15 +29,12 @@ function App() {
     textFont: watermarkTexFont,
     textIndent: watermarkTextIndent,
     src: `${initUri} `,
-    customFontsUrl: [{ fontName: "Sofia", url: SofiaFont }], 
+    customFontsUrl: [{ fontName: "Sofia", url: SofiaFont }],
   });
 
-  useEffect(() => {
-    console.log('watermarkTexFont', watermarkTexFont)
-  }, [watermarkTexFont])
-
   return (
-    <WatermarkContext.Provider value={{fonts: [...FONTS]}}>
+    <WatermarkContext.Provider value={{ fonts: [...FONTS] }}>
+      <Header />
       <div className="row">
         <div className="col">
           <WatermarkForm
@@ -50,8 +47,14 @@ function App() {
             setTextIndent={setWatermarkTextIndent}
           />
         </div>
-        <div className="col">
-          <WatermarkView uri={uri} />
+        <div className="col col-preview">
+          {initUri ? (
+            <WatermarkView uri={uri} />
+          ) : (
+            <p>
+              👉 Click <b>"Choose image"</b>. <br /> Here will be your image 🎑{" "}
+            </p>
+          )}
         </div>
       </div>
     </WatermarkContext.Provider>

@@ -16,7 +16,7 @@ export type UseImgToURIWithWatermarkType<T> = {
   textFont: WatermarkTextFont;
   customFontsUrl?: CustomFontsType<T>[], 
   textIndent: number;
-  src: string;
+  src?: string;
 };
 
 export const useImgToURIWithWatermark = <T extends string>({
@@ -29,9 +29,9 @@ export const useImgToURIWithWatermark = <T extends string>({
   textIndent,
   customFontsUrl
 }: UseImgToURIWithWatermarkType<T>) => {
-  const [uri, setUri] = useState("");
+  const [uri, setUri] = useState<string>("");
   const imageObj = useMemo(() => new Image(), []);
-
+  
   useEffect(() => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
@@ -89,12 +89,14 @@ export const useImgToURIWithWatermark = <T extends string>({
     textPosition,
     textIndent,
     textFont,
-    customFontsUrl
+    customFontsUrl,
   ]);
 
   useEffect(() => {
     imageObj.crossOrigin = "anonymous"; //not necessary, if image hosted on same server
-    imageObj.src = src;
+    if(src) {
+      imageObj.src = src;
+    }  
   }, [
     imageObj,
     src,

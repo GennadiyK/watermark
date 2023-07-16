@@ -30,7 +30,8 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
   }))
 
   return (
-    <>
+    <fieldset>
+      <legend>Watermark Settings</legend>
       <FormItem>
         <FormField
           fieldType="color"
@@ -66,6 +67,7 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
           fieldId="position"
           labelText="Choose position:"
           selectProps={{
+            defaultValue: selectPositionOptions[0],
             options: selectPositionOptions,
             onChange: onChangePositionHandler as any, // TO DO fix
           }}
@@ -80,6 +82,6 @@ export const WatermarkTextSettings: React.FC<WatermarkTextSettingsType> = ({
           onChangeHandler={onChangeIndentHandler}
         />
       </FormItem>
-    </>
+    </fieldset>
   );
 };

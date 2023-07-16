@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {SingleValue, ActionMeta} from 'react-select'
-import {SelectOption} from '../Select/Select'
+import { SingleValue, ActionMeta } from "react-select";
+import { SelectOption } from "../Select/Select";
 import { WatermarkTextSettings } from "../WatermarkTextSetting/WatermarkTextSettings";
 import { FormItem } from "../FormItem/FormItem";
 import { FormField } from "../FormField/FormField";
@@ -28,10 +28,7 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
   setTextFont,
   setTextIndent,
 }) => {
-  const [text, setText] = useState("");
-  const [fileIsChosen, setFileIsChosen] = useState(false);
   const onTextFieldChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setText(e.target.value);
     setWatermarkText(e.target.value);
   };
 
@@ -46,11 +43,9 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     };
     if (file) {
       fileReader.readAsDataURL(new Blob([file]));
-      setFileIsChosen(true);
     } else {
-      setFileIsChosen(false);
+      setInitUri(undefined);
     }
-   
   };
 
   const onTextColoreChangeHandler: React.ChangeEventHandler<
@@ -65,20 +60,25 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     setTextSize(e.target.value);
   };
 
-  const onTextPositionChangeHandler:  ((newValue: SingleValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => void)  = (option) => {
+  const onTextPositionChangeHandler: (
+    newValue: SingleValue<SelectOption>,
+    actionMeta: ActionMeta<SelectOption>
+  ) => void = (option) => {
     setTextPosition(option?.value as any); // ToDo: fix any
   };
 
-  const onTextFontChangeHandler: ((newValue: SingleValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => void)  = (option) => {
-  setTextFont(option?.value as any); // ToDo: fix any
-};
+  const onTextFontChangeHandler: (
+    newValue: SingleValue<SelectOption>,
+    actionMeta: ActionMeta<SelectOption>
+  ) => void = (option) => {
+    setTextFont(option?.value as any); // ToDo: fix any
+  };
 
   const onIndentChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
     e
   ) => {
     setTextIndent(parseInt(e.target.value, 10));
   };
-
 
   return (
     <>
@@ -90,24 +90,20 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
           onChangeHandler={onFileFieldChange}
         />
       </FormItem>
-      {fileIsChosen && (
-        <FormItem>
-          <FormField
-            fieldId="textField"
-            labelText="Add watermark text:"
-            onChangeHandler={onTextFieldChange}
-          />
-        </FormItem>
-      )}
-      {text && (
-        <WatermarkTextSettings
-          onChangeColorHandler={onTextColoreChangeHandler}
-          onChangeSizeHandler={onTextSizeChangeHandler}
-          onChangePositionHandler={onTextPositionChangeHandler}
-          onChangeFontHandler={onTextFontChangeHandler}
-          onChangeIndentHandler={onIndentChangeHandler}
+      <FormItem>
+        <FormField
+          fieldId="textField"
+          labelText="Add watermark text:"
+          onChangeHandler={onTextFieldChange}
         />
-      )}
+      </FormItem>
+      <WatermarkTextSettings
+        onChangeColorHandler={onTextColoreChangeHandler}
+        onChangeSizeHandler={onTextSizeChangeHandler}
+        onChangePositionHandler={onTextPositionChangeHandler}
+        onChangeFontHandler={onTextFontChangeHandler}
+        onChangeIndentHandler={onIndentChangeHandler}
+      />
     </>
   );
 };
