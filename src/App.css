@@ -9,16 +9,10 @@ body {
 
 .row {
   display: flex;
-  width: 600px;
 }
 
 .col:nth-child(1) {
   margin-right: 16px;
-  width: 40%;
-}
-
-.col {
-  width: 50%;
 }
 
 .col-preview {
