@@ -1,4 +1,6 @@
 import React from "react";
+import Select, {Props, StylesConfig} from 'react-select'
+import './select.css'
 
 export type SelectOption = {
   label: string;
@@ -6,28 +8,20 @@ export type SelectOption = {
 };
 
 export type SelectProps = {
-  value?: string;
-  disabled?: boolean;
   className?: string;
   options: SelectOption[];
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-};
+} & Props<SelectOption, boolean>
 
-export const Select: React.FC<SelectProps> = ({ onChange, options }) => {
+export const SelectComponent: React.FC<SelectProps> = ({ onChange, options, defaultValue }) => {
+  const fontStyles: StylesConfig<SelectOption> =  {
+    option: (styles, {data}) => {
+      return {
+        ...styles,
+        fontFamily: data.value
+      }
+    }
+  }
   return (
-    <select id="position" onChange={onChange}>
-      {options.map(({ label, value }) => {
-        return <option value={value}>{label}</option>;
-      })}
-      {/* <option value="leftTop">left top</option>
-          <option value="leftCenter">left center</option>
-          <option value="leftBottom">left bottom</option>
-          <option value="rightTop">right top</option>
-          <option value="rightCenter">right center</option>
-          <option value="rightBottom">right bottom</option>
-          <option value="center">center</option>
-          <option value="topCenter">top center</option>
-          <option value="bottomCenter">bottom center</option> */}
-    </select>
+    <Select defaultValue={defaultValue} id="position"  options={options} styles={fontStyles} onChange={onChange}/>
   );
 };

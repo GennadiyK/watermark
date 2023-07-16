@@ -1,12 +1,11 @@
-import {createContext} from 'react'
+import { createContext } from "react";
+import {WatermarkTextFont} from '../types'
+
 
 type WatermarkContextType = {
-    uri?: string
-    watermarkText?: string
-    textSettings?: {
-        size?: string
-        color?: string
-    }
-}
+  fonts: WatermarkTextFont[];
+};
 
-export const WatermarkContext = createContext<WatermarkContextType>({})
+export const WatermarkContext = createContext<WatermarkContextType>({
+  fonts: [],
+});

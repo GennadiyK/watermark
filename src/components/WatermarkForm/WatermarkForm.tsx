@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import {SingleValue, ActionMeta} from 'react-select'
+import {SelectOption} from '../Select/Select'
 import { WatermarkTextSettings } from "../WatermarkTextSetting/WatermarkTextSettings";
 import { FormItem } from "../FormItem/FormItem";
 import { FormField } from "../FormField/FormField";
-import { WatermarkPositionType, WatermarkTextFont } from "../../hooks/types";
+import { WatermarkPositionType, WatermarkTextFont } from "../../types";
 import "./watermarkForm.css";
 
 type WatermarkFormProps = {
@@ -63,16 +65,12 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     setTextSize(e.target.value);
   };
 
-  const onTextPositionChangeHandler: React.ChangeEventHandler<
-    HTMLSelectElement
-  > = (e) => {
-    setTextPosition(e.target.value as any); // ToDo: fix any
+  const onTextPositionChangeHandler:  ((newValue: SingleValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => void)  = (option) => {
+    setTextPosition(option?.value as any); // ToDo: fix any
   };
 
-  const onTextFontChangeHandler: React.ChangeEventHandler<
-  HTMLSelectElement
-> = (e) => {
-  setTextFont(e.target.value as any); // ToDo: fix any
+  const onTextFontChangeHandler: ((newValue: SingleValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => void)  = (option) => {
+  setTextFont(option?.value as any); // ToDo: fix any
 };
 
   const onIndentChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (

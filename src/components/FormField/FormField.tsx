@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, SelectProps } from "../Select/Select";
+import { SelectComponent, SelectProps } from "../Select/Select";
 import "./formField.css";
 
 type FieldType = "text" | "color" | "file" | "number" | "select";
@@ -11,10 +11,6 @@ export type FormFieldProps = {
   onChangeHandler?: React.ChangeEventHandler<HTMLInputElement> | undefined;
   placeholder?: string;
   selectProps?: SelectProps;
-};
-
-const renderSelectField = (props: SelectProps) => {
-  return <Select {...props} />;
 };
 
 export const FormField: React.FC<FormFieldProps> = ({
@@ -34,7 +30,7 @@ export const FormField: React.FC<FormFieldProps> = ({
       ) : null}
 
       {fieldType === "select" && selectProps ? (
-        renderSelectField(selectProps)
+        <SelectComponent {...selectProps} />
       ) : (
         <input
           className="form-field-text"
