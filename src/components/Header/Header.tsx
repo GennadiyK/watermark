@@ -6,7 +6,7 @@ import './header.css'
 export const Header = () => {
     return (
         <header className='header'>
-            <img src={logo} alt="Watermark" height="120px"/>
+            <img src={logo} alt="Watermark" height="120px" className='header-img'/>
         </header>
     )
 }

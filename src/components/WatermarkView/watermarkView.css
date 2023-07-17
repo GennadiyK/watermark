@@ -1,9 +1,38 @@
 .watermark-view {
-    width: 300px;
-    height: 300px;
+  padding-bottom: 12px;
 }
 
 .watermark-view-img {
-    width: 100%;
+  max-width: 100%;
+  height: auto;
+}
 
+.watermark-view-img {
+  margin: 0 0 10px;
+}
+
+.watermark-view-btn {
+  display: inline-flex;
+  padding: 10px 12px;
+  text-decoration: none;
+  background-color: rgb(0, 110, 255);
+  box-shadow: 0px 6px 4px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.watermark-view-btn:hover {
+  background-color: rgb(0, 73, 169);
+}
+
+@media (min-width: 600px) {
+  .row {
+    flex-direction: row;
+  }
+  .col:nth-child(1) {
+    margin-right: 16px;
+  }
+  .watermark-view {
+    max-width: 300px;
+  }
 }
