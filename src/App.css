@@ -9,27 +9,27 @@ body {
   margin: 0;
   padding: 0;
   justify-content: center;
-  
 }
 
 .row {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: center;
 }
-
-@media (min-width: 600px) {
-  .row {
-    flex-direction: row;
-  }
-  .col:nth-child(1) {
-    margin-right: 16px;
-  }  
-}
-
 
 .col-preview {
   display: flex;
   justify-content: center;
-  
+  width: 300px;
+  position: sticky;
+  top: 0;
+}
+
+@media (min-width: 600px) {
+  .row {
+    flex-direction: row-reverse;
+  }
+  .col:nth-child(1) {
+    margin-left: 16px;
+  }  
 }

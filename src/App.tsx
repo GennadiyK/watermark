@@ -36,7 +36,16 @@ function App() {
     <WatermarkContext.Provider value={{ fonts: [...FONTS] }}>
       <Header />
       <div className="row">
-        <div className="col">
+        <div className="col col-preview">
+          {initUri ? (
+            <WatermarkView uri={uri} />
+          ) : (
+            <p>
+              👉 Click <b>"Choose image"</b>. Here will be your image 🎑{" "}
+            </p>
+          )}
+        </div>
+        <div className="col col-settings">
           <WatermarkForm
             setInitUri={setInitUri}
             setTextColor={setWatermarkTextColor}
@@ -46,15 +55,6 @@ function App() {
             setTextFont={setWatermarkTexFont}
             setTextIndent={setWatermarkTextIndent}
           />
-        </div>
-        <div className="col col-preview">
-          {initUri ? (
-            <WatermarkView uri={uri} />
-          ) : (
-            <p>
-              👉 Click <b>"Choose image"</b>. <br /> Here will be your image 🎑{" "}
-            </p>
-          )}
         </div>
       </div>
     </WatermarkContext.Provider>
