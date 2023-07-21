@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { WatermarkContext } from "./context";
 import SofiaFont from "./assets/fonts/Sofia-Regular.ttf";
 import { useImgToURIWithWatermark } from "./hooks";

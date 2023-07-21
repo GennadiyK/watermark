@@ -11,7 +11,9 @@ export const WatermarkView: React.FC<WatermarkViewProps> = ({ uri }) => {
     <div className="watermark-view">
       {uri && (
         <>
-          <img src={uri} alt="" className="watermark-view-img" />
+          <div className="watermark-view-img-wrapper">
+            <img src={uri} alt="" className="watermark-view-img" />
+          </div>
           <a className="watermark-view-btn" href={uri} download>
             &#x2714; Download file
           </a>

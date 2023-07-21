@@ -5,6 +5,7 @@ import { WatermarkTextSettings } from "../WatermarkTextSetting/WatermarkTextSett
 import { FormItem } from "../FormItem/FormItem";
 import { FormField } from "../FormField/FormField";
 import { WatermarkPositionType, WatermarkTextFont } from "../../types";
+import {debaunce} from '../../helpers'
 import "./watermarkForm.css";
 
 type WatermarkFormProps = {
@@ -28,11 +29,11 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
   setTextFont,
   setTextIndent,
 }) => {
-  const onTextFieldChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setWatermarkText(e.target.value);
-  };
+  const onTextFieldChange: React.ChangeEventHandler<HTMLInputElement> = debaunce((e) => { // TO DO Fix any
+     setWatermarkText(e.target.value);
+  });
 
-  const onFileFieldChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onFileFieldChange: React.ChangeEventHandler<HTMLInputElement> = debaunce((e) => {
     const file = e?.target?.files?.[0];
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -46,26 +47,26 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     } else {
       setInitUri(undefined);
     }
-  };
+  });
 
   const onTextColoreChangeHandler: React.ChangeEventHandler<
     HTMLInputElement
-  > = (e) => {
+  > = debaunce((e) => {
     setTextColor(e.target.value);
-  };
+  }, 300);
 
-  const onTextSizeChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
+  const onTextSizeChangeHandler: React.ChangeEventHandler<HTMLInputElement> = debaunce((
     e
   ) => {
     setTextSize(e.target.value);
-  };
+  });
 
   const onTextPositionChangeHandler: (
     newValue: SingleValue<SelectOption>,
     actionMeta: ActionMeta<SelectOption>
-  ) => void = (option) => {
+  ) => void = debaunce((option) => {
     setTextPosition(option?.value as any); // ToDo: fix any
-  };
+  });
 
   const onTextFontChangeHandler: (
     newValue: SingleValue<SelectOption>,
@@ -74,11 +75,11 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     setTextFont(option?.value as any); // ToDo: fix any
   };
 
-  const onIndentChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
+  const onIndentChangeHandler: React.ChangeEventHandler<HTMLInputElement> = debaunce((
     e
   ) => {
     setTextIndent(parseInt(e.target.value, 10));
-  };
+  });
 
   return (
     <>
