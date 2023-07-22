@@ -31,9 +31,9 @@ export const useImgToURIWithWatermark = <T extends string>({
 }: UseImgToURIWithWatermarkType<T>) => {
   const [uri, setUri] = useState<string>("");
   const imageObj = useMemo(() => new Image(), []);
+  const canvas = useMemo(() => document.createElement("canvas"), []);
   
   useEffect(() => {
-    const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     const customFonts = customFontsUrl ? customFontsUrl.map(({fontName, url}) =>(new FontFace(fontName, `url(${url})`))) : undefined
 
@@ -83,6 +83,7 @@ export const useImgToURIWithWatermark = <T extends string>({
     }
   }, [
     imageObj,
+    canvas,
     fillText,
     textColor,
     textSize,
