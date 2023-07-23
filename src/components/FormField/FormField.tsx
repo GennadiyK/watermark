@@ -33,7 +33,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         <SelectComponent {...selectProps} />
       ) : (
         <input
-          className="form-field-text"
+          className="form-field"
           id={fieldId}
           type={fieldType}
           onChange={onChangeHandler}

@@ -35,7 +35,7 @@ function App() {
   return (
     <WatermarkContext.Provider value={{ fonts: [...FONTS] }}>
       <Header />
-      <div className="row">
+      <div className="inner row">
         <div className="col col-preview">
           {uri ? (
             <WatermarkView uri={uri} />
