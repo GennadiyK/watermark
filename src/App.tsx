@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { WatermarkContext } from "./context";
 import SofiaFont from "./assets/fonts/Sofia-Regular.ttf";
 import { useImgToURIWithWatermark } from "./hooks";
@@ -10,7 +10,7 @@ import { FONTS } from "./data";
 import "./App.css";
 
 function App() {
-  const [initUri, setInitUri] = useState<string | ArrayBuffer>();
+  const [initUri, setInitUri] = useState<string>();
   const [watermarkText, setWatermarkText] = useState("");
   const [watermarkTextColor, setWatermarkTextColor] = useState("");
   const [watermarkTextSize, setWatermarkTextSize] = useState(DEFAULT_TEXT_SIZE);
@@ -28,7 +28,7 @@ function App() {
     textPosition: watermarkTexPosition,
     textFont: watermarkTexFont,
     textIndent: watermarkTextIndent,
-    src: `${initUri} `,
+    src: initUri,
     customFontsUrl: [{ fontName: "Sofia", url: SofiaFont }],
   });
 
@@ -37,7 +37,7 @@ function App() {
       <Header />
       <div className="row">
         <div className="col col-preview">
-          {initUri ? (
+          {uri ? (
             <WatermarkView uri={uri} />
           ) : (
             <p>

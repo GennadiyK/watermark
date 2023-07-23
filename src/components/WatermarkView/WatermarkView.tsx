@@ -2,7 +2,7 @@ import React from "react";
 import "./watermarkView.css";
 
 type WatermarkViewProps = {
-  uri: string;
+  uri?: string;
   imgAlt?: string;
 };
 

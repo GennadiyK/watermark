@@ -29,7 +29,7 @@ export const useImgToURIWithWatermark = <T extends string>({
   textIndent,
   customFontsUrl
 }: UseImgToURIWithWatermarkType<T>) => {
-  const [uri, setUri] = useState<string>("");
+  const [uri, setUri] = useState<string | undefined>(undefined);
   const imageObj = useMemo(() => new Image(), []);
   const canvas = useMemo(() => document.createElement("canvas"), []);
   
@@ -72,9 +72,15 @@ export const useImgToURIWithWatermark = <T extends string>({
         context.fillText(fillText, posX, posY);
       }
       const imgUrl = canvas.toDataURL();
+      imageObj.crossOrigin = "anonymous"
       setUri(imgUrl);
     };
 
+    if(src) {
+      imageObj.src = src;
+    } else {
+      setUri(undefined)
+    }
     return () => {
       customFonts?.forEach((font) => {
         document.fonts.delete(font);
@@ -83,6 +89,7 @@ export const useImgToURIWithWatermark = <T extends string>({
     }
   }, [
     imageObj,
+    src,
     canvas,
     fillText,
     textColor,
@@ -91,23 +98,6 @@ export const useImgToURIWithWatermark = <T extends string>({
     textIndent,
     textFont,
     customFontsUrl,
-  ]);
-
-  useEffect(() => {
-    imageObj.crossOrigin = "anonymous"; //not necessary, if image hosted on same server
-    if(src) {
-      imageObj.src = src;
-    }  
-  }, [
-    imageObj,
-    src,
-    fillText,
-    textColor,
-    textSize,
-    textPosition,
-    textIndent,
-    textFont,
-    customFontsUrl
   ]);
 
   return uri;

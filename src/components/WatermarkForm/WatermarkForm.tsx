@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { SingleValue, ActionMeta } from "react-select";
 import { SelectOption } from "../Select/Select";
 import { WatermarkTextSettings } from "../WatermarkTextSetting/WatermarkTextSettings";
@@ -11,7 +11,7 @@ import "./watermarkForm.css";
 type WatermarkFormProps = {
   setWatermarkText: React.Dispatch<React.SetStateAction<string>>;
   setInitUri: React.Dispatch<
-    React.SetStateAction<string | ArrayBuffer | undefined>
+    React.SetStateAction<string | undefined>
   >;
   setTextColor: React.Dispatch<React.SetStateAction<string>>;
   setTextSize: React.Dispatch<React.SetStateAction<string>>;
@@ -38,7 +38,7 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     const fileReader = new FileReader();
     fileReader.onload = () => {
       const srcData = fileReader.result;
-      if (srcData) {
+      if (typeof srcData === 'string') {
         setInitUri(srcData);
       }
     };
