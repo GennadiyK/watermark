@@ -9,7 +9,6 @@ import {debaunce} from '../../helpers'
 import "./watermarkForm.css";
 
 type WatermarkFormProps = {
-  setWatermarkText: React.Dispatch<React.SetStateAction<string>>;
   setInitUri: React.Dispatch<
     React.SetStateAction<string | undefined>
   >;
@@ -18,22 +17,20 @@ type WatermarkFormProps = {
   setTextPosition: React.Dispatch<React.SetStateAction<WatermarkPositionType>>;
   setTextFont: React.Dispatch<React.SetStateAction<WatermarkTextFont>>;
   setTextIndent: React.Dispatch<React.SetStateAction<number>>;
+  setImgIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const WatermarkForm: React.FC<WatermarkFormProps> = ({
-  setWatermarkText,
   setInitUri,
   setTextColor,
   setTextSize,
   setTextPosition,
   setTextFont,
   setTextIndent,
+  setImgIsLoading,
 }) => {
-  const onTextFieldChange: React.ChangeEventHandler<HTMLInputElement> = debaunce((e) => { // TO DO Fix any
-     setWatermarkText(e.target.value);
-  });
-
-  const onFileFieldChange: React.ChangeEventHandler<HTMLInputElement> = debaunce((e) => {
+  const onFileFieldChange = (setImgIsLoadingCallback: React.Dispatch<React.SetStateAction<boolean>>):React.ChangeEventHandler<HTMLInputElement> => (e) => {
+    setImgIsLoadingCallback(true)
     const file = e?.target?.files?.[0];
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -47,7 +44,7 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
     } else {
       setInitUri(undefined);
     }
-  });
+  };
 
   const onTextColoreChangeHandler: React.ChangeEventHandler<
     HTMLInputElement
@@ -88,14 +85,7 @@ export const WatermarkForm: React.FC<WatermarkFormProps> = ({
           fieldType="file"
           fieldId="fileField"
           labelText="Choose image:"
-          onChangeHandler={onFileFieldChange}
-        />
-      </FormItem>
-      <FormItem>
-        <FormField
-          fieldId="textField"
-          labelText="Add watermark text:"
-          onChangeHandler={onTextFieldChange}
+          onChangeHandler={onFileFieldChange(setImgIsLoading)}
         />
       </FormItem>
       <WatermarkTextSettings

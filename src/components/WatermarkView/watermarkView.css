@@ -1,4 +1,5 @@
 .watermark-view-img-wrapper {
+  position: relative;
   margin: 0 0 10px;
   height: 200px;
 }
@@ -13,14 +14,29 @@
   object-fit: contain;
 }
 
+.watermark-view-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .watermark-view-btn {
   display: inline-flex;
+  font-size: 0.875rem;
   padding: 10px 12px;
   text-decoration: none;
   background-color: rgb(0, 110, 255);
   box-shadow: 0px 6px 4px -6px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
   color: #fff;
+  border: none;
+  margin: 0 4px;
+}
+
+a[aria-disabled="true"] {
+  color: currentColor;
+  display: inline-block;
+  pointer-events: none;
+  text-decoration: none;
 }
 
 .watermark-view-btn:hover {

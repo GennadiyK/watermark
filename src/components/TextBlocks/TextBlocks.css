@@ -1,0 +1,41 @@
+.watermark-text-blocks {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  
+  }
+  
+  .watermark-text {
+    cursor: pointer;
+    margin: 0;
+    white-space: nowrap;
+    outline: none;
+  }
+
+  .watermark-text-editable {
+    outline: 2px solid blue;
+    border: none;
+  }
+  .watermark-text-block {
+    position: relative;
+    padding-right: 32px;
+  }
+
+  .watermark-text-block:hover .watermark-text-delete-btn {
+    display: block;
+
+  }
+
+  .watermark-text-delete-btn {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 0; 
+    padding: 2px 4px;
+    display: none;
+  }
+
